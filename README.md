@@ -1,9 +1,12 @@
+[![Stars](https://img.shields.io/github/stars/anshu957?style=social)](https://github.com/anshu957/anshu957)
+[![Twitter](https://img.shields.io/twitter/follow/anshulheaven?style=social)](https://twitter.com/anshulheaven)
 
-💬 About me
+🚀 Trained as a Robotics and Automation Engineer, ventured into the corporate world with SAP Business Analytics, 
+and now passionately pursuing scientific problems, diving deep into Physics, Dynamical Systems, 
+and Machine Learning, all while unlocking their powerful applications in Mammalian Genomics!
 
-    🚀 Trained as a Robotics and Automation Engineer, ventured into the corporate world with SAP Business Analytics, 
-       and now passionately pursuing scientific problems, diving deep into Physics, Dynamical Systems, 
-       and Machine Learning, all while unlocking their powerful applications in Mammalian Genomics!
+
+   
   
     📊🌐 My experience spans modeling dynamical systems (ODEs, SDEs) on graphs (complex network topologies) 
         for Physics & Ecology, exploring emergence of spatio-temporal patterns 🌍
@@ -32,8 +35,6 @@
     🧬 Single Cell Biology: Unraveling the secrets of cellular diversity, 
        function, and behavior at the individual cell level for a deeper understanding of 
        biology!
-     
-     🕸️ Graph Neural Networks: Exploring the power of GNNs to analyze and model intricate data on graphs. 
      
 
 🔗🔬 Let's forge connections, collaborate, and contribute meaningfully to the realm of data-driven scientific research! 

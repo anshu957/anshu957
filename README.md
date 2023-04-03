@@ -21,12 +21,6 @@ and now pursuing scientific research at the interface of Physics, Dynamical Syst
 
     HPC, Docker, Git, PyTorch, Scikit-learn, Python(pandas, numpy, scipy, matplotlib), 
     Julia, C/C++. 
-
-
-🌱 I’m currently learning:
-
-    🎓 Semi-definite Programming: Diving into the world of convex optimization and 
-       mathematical programming to solve complex problems with precision!
      
 
-🔗🔬 Let's forge connections, collaborate, and contribute meaningfully to the realm of data-driven scientific research! 
+🔗🔬 Here to forge connections, collaborate, and contribute towards reproducible data-driven scientific research! 

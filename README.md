@@ -4,10 +4,10 @@
 🚀 Trained as a Robotics and Automation Engineer, followed by a corporate stint with SAP Business Analytics, 
 and now pursuing scientific research at the interface of Physics, Dynamical Systems, Machine Learning and Genomics. 
 
-    📊🌐 Experience in modeling dynamical systems (ODEs, SDEs) on graphs (complex network topologies) 
+    📊🌐 Expertise in modeling dynamical systems (ODEs, SDEs) on graphs (complex network topologies) 
         for Physics & Ecology, exploring emergence of spatio-temporal patterns 🌍
         
-    🧠💡 Expertise in Unsupervised ML (clustering, PCA, UMAP, t-SNE) and 
+    🧠💡 Experience in Unsupervised ML (clustering, PCA, UMAP, t-SNE) and 
         Supervised ML (linear regression, classification), physics informed neural networks.
 
 🧬🔍 My current project:

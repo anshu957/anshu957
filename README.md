@@ -23,4 +23,4 @@ and now pursuing scientific research at the interface of Physics, Dynamical Syst
     Julia, C/C++. 
      
 
-🔗🔬 Here to forge connections, collaborate, and contribute towards reproducible data-driven scientific research! 
+🔗🔬 Here to share, collaborate, and contribute towards reproducible data-driven scientific research! 

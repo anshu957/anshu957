@@ -13,13 +13,12 @@ and now pursuing scientific research at the interface of Physics, Dynamical Syst
 🧬🔍 My current project:
 
       Using RNA velocity obtained from scRNA-seq to identify cell states & fate by 
-      tapping into the world of attractors & basins in dynamical systems. A nuanced view 
-      of cell state transitions & drivers of cell fate decisions is on the horizon!
+      tapping into the world of attractors & basins in dynamical systems opening a new window for in-silico perturbation experiments. 
 
 
 💻🔧 Technical toolkit: 
 
-    HPC, Docker, Git, PyTorch, Scikit-learn, Python(pandas, numpy, scipy, matplotlib), 
+    HPC, Docker/Singularity, Git, PyTorch, Scikit-learn, Python(pandas, numpy, scipy, matplotlib), 
     Julia, C/C++. 
      
 

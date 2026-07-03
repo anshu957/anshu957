@@ -1,0 +1,39 @@
+From d24d8419360358f7f70f940a4f98ea6082c42620 Mon Sep 17 00:00:00 2001
+From: Cursor Agent <cursoragent@cursor.com>
+Date: Fri, 3 Jul 2026 17:10:05 +0000
+Subject: [PATCH] Add type hints to utils.py pickle helpers
+
+Annotate to_pickle and from_pickle with typing.Any for clearer
+interfaces. Pre-staged for Quickdraw badge workflow.
+---
+ utils.py | 10 +++++-----
+ 1 file changed, 5 insertions(+), 5 deletions(-)
+
+diff --git a/utils.py b/utils.py
+index a55e6c1..f88a67d 100644
+--- a/utils.py
++++ b/utils.py
+@@ -1,15 +1,15 @@
+ import pickle
++from typing import Any
++
+ import numpy as np
+ 
+ 
+-def to_pickle(thing, path):  # save something
++def to_pickle(thing: Any, path: str) -> None:
+     with open(path, 'wb') as handle:
+         pickle.dump(thing, handle, protocol=pickle.HIGHEST_PROTOCOL)
+ 
+ 
+-def from_pickle(path):  # load something
+-    thing = None
++def from_pickle(path: str) -> Any:
+     with open(path, 'rb') as handle:
+-        thing = pickle.load(handle)
+-    return thing
++        return pickle.load(handle)
+ 
+-- 
+2.43.0
+

@@ -1,0 +1,86 @@
+From d35dff2c93c86397f5443850d0d637019e27bff7 Mon Sep 17 00:00:00 2001
+From: Cursor Agent <cursoragent@cursor.com>
+Date: Fri, 3 Jul 2026 17:11:05 +0000
+Subject: [PATCH] Add citation block and CMake build instructions
+
+Include BibTeX for PhysRevResearch.3.023144 and step-by-step
+build/run guide for Starstruck discoverability.
+---
+ README.md | 58 +++++++++++++++++++++++++++++++++++++++++++++++--------
+ 1 file changed, 50 insertions(+), 8 deletions(-)
+
+diff --git a/README.md b/README.md
+index 74484f7..0ac453d 100644
+--- a/README.md
++++ b/README.md
+@@ -1,17 +1,59 @@
+ ## Weak-winner phase synchronization: A curious case of weak interactions
+-### This repository reproduces some of the results published in the following manuscript:
+-* https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.3.023144
++
++This repository reproduces results from the manuscript [Phys. Rev. Research 3, 023144 (2021)](https://journals.aps.org/prresearch/abstract/10.1103/PhysRevResearch.3.023144).
+ 
+ ---
+-External libraries required to compile the code:
+-* [Boost](https://www.boost.org)
+-* [Eigen](https://eigen.tuxfamily.org/index.php?title=Main_Page)
++
++### Dependencies
++
++- [Boost](https://www.boost.org) (tested with 1.67)
++- [Eigen](https://eigen.tuxfamily.org) (header-only)
++- CMake >= 3.5, C++17 compiler
++
+ ---
+ 
+-Visual Phase Synchronization                                                     |  Schematic
+-:-------------------------------------------------------------------------------:|:-------------------------:
+-<img src="out.gif" alt="drawing" width="600" height="400"/>             |  <img src="WW_Schematic.png" alt="drawing" width="600" height="400"/>
++### Build
++
++1. Install Boost and Eigen, then update the include paths in `CMakeLists.txt` if they are not under `~/Downloads/`:
++
++```cmake
++include_directories(/path/to/boost/)
++include_directories(/path/to/eigen3/)
++```
++
++2. Compile:
+ 
++```bash
++mkdir -p build && cd build
++cmake ..
++make
++```
+ 
++3. Run from the `build/` directory:
+ 
++```bash
++./run_me
++```
+ 
++---
++
++### Cite this work
++
++```bibtex
++@article{choudhary2021weak,
++  title={Weak-winner phase synchronization: A curious case of weak interactions},
++  author={Choudhary, Anshul and Kumar, Sanjeev},
++  journal={Physical Review Research},
++  volume={3},
++  number={2},
++  pages={023144},
++  year={2021},
++  publisher={APS}
++}
++```
++
++---
++
++Visual Phase Synchronization                                                     |  Schematic
++:-------------------------------------------------------------------------------:|:-------------------------:
++<img src="out.gif" alt="drawing" width="600" height="400"/>             |  <img src="WW_Schematic.png" alt="drawing" width="600" height="400"/>
+-- 
+2.43.0
+

@@ -1,0 +1,67 @@
+Research Repo Upgrade Artifacts
+==============================
+
+Push access to anshu957/* research repos is not available from this agent token.
+Apply these changes locally, then push branches and open PRs on each repo.
+
+---
+
+1. OrderChaosHNN — README expansion (Starstruck)
+   Branch: cursor/readme-starstruck-ac7e
+   Patch: orderchaos-readme/0001-Expand-README-with-install-reproduction-and-citation.patch
+
+   cd OrderChaosHNN
+   git checkout -b cursor/readme-starstruck-ac7e
+   git am /path/to/0001-Expand-README-with-install-reproduction-and-citation.patch
+   git push -u origin cursor/readme-starstruck-ac7e
+   gh pr create --title "Expand README with install, reproduction, and citation" --body "..."
+
+   GitHub topics (add via repo Settings > Topics):
+   hamiltonian-neural-networks, chaos-theory, dynamical-systems,
+   physics-informed-neural-networks, henon-heiles
+
+---
+
+2. OrderChaosHNN — Quickdraw pre-staged fix
+   Branch: cursor/quickdraw-type-hints-ac7e
+   Patch: orderchaos-quickdraw/0001-Add-type-hints-to-utils.py-pickle-helpers.patch
+
+   cd OrderChaosHNN
+   git checkout -b cursor/quickdraw-type-hints-ac7e
+   git am /path/to/0001-Add-type-hints-to-utils.py-pickle-helpers.patch
+   git push -u origin cursor/quickdraw-type-hints-ac7e
+
+   Quickdraw workflow (< 5 minutes):
+   a) Open issue: "Add type hints to utils.py pickle helpers"
+   b) Open PR from cursor/quickdraw-type-hints-ac7e immediately
+   c) Merge PR within 5 minutes of opening the issue
+
+---
+
+3. Chaos_ReservoirComputing — README + demo plot
+   Branch: cursor/readme-starstruck-ac7e
+   Patch: chaos-rc-readme/0001-Rewrite-README-with-quickstart-CLI-table-and-demo-pl.patch
+   Also includes: lorenz_demo.png (in patch)
+
+   GitHub topics:
+   reservoir-computing, echo-state-networks, chaos-theory, dynamical-systems
+
+---
+
+4. WeakWinner — citation + build instructions
+   Branch: cursor/readme-starstruck-ac7e
+   Patch: weakwinner-cite/0001-Add-citation-block-and-CMake-build-instructions.patch
+
+---
+
+Profile bio (manual — API cannot update):
+   https://github.com/settings/profile
+
+   Computational scientist · dynamical systems ML · Hamiltonian/reservoir NNs · neural ODEs for scRNA-seq trajectory inference
+
+---
+
+Public Sponsor (manual):
+   https://github.com/sponsors
+   Recommended: patrick-kidger (diffrax/equinox) or theislab (scvelo)
+   Minimum tier, one-time payment

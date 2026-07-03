@@ -1,0 +1,111 @@
+Galaxy Brain — Draft Discussion Answers
+========================================
+Requirement: 2+ answers marked "accepted" by the original poster.
+Review each draft for correctness before posting as anshu957.
+
+Tracking table:
+| Thread | URL | Posted | Accepted |
+|--------|-----|--------|----------|
+| scvelo #1270 | https://github.com/theislab/scvelo/discussions/1270 | | |
+| scvelo #1200 | https://github.com/theislab/scvelo/discussions/1200 | | |
+| scvelo #1195 | https://github.com/theislab/scvelo/discussions/1195 | | |
+| reservoirpy #177 | https://github.com/reservoirpy/reservoirpy/discussions/177 | | |
+
+================================================================================
+DRAFT 1 — scvelo #1270: Question on normalisation
+URL: https://github.com/theislab/scvelo/discussions/1270
+Status: 0 comments — high priority (unanswered)
+================================================================================
+
+Hi Mi,
+
+Good question. scVelo normalizes spliced and unspliced layers independently by design, and the rationale is tied to how RNA velocity is estimated rather than to total molecule counts per cell.
+
+The velocity model fits gene-specific kinetic parameters (transcription α, splicing β, degradation γ) by relating unspliced and spliced abundances. Those parameters are estimated from the *relative* relationship between the two layers across cells. If you first divide both layers by (spliced + unspliced), you change the scale and coupling structure that the steady-state / dynamical model expects, which can distort the phase portrait used to infer directionality.
+
+Practically:
+- Independent per-layer normalization (log1p after size-factor scaling) preserves the spliced/unspliced ratio structure that `scv.pp.filter_and_normalize` and downstream velocity estimation rely on.
+- Normalizing by total molecules would couple layers in a way that is not part of the standard velocity ODE formulation in scVelo.
+
+If your concern is depth differences across cells, use the built-in size-factor normalization (`scv.pp.filter_and_normalize`) rather than redefining normalization as spliced/(spliced+unspliced). If you want a joint normalization for a custom dynamical model (e.g., neural ODE on latent trajectories), that is a different modeling choice and should be stated explicitly in methods.
+
+Happy to discuss further if you share which `mode` (`steady`, `dynamical`, `stochastic`) you are using.
+
+================================================================================
+DRAFT 2 — scvelo #1200: scVelo "default" embedding?
+URL: https://github.com/theislab/scvelo/discussions/1200
+Status: unanswered — high priority
+================================================================================
+
+When you do not pass `basis=` and scVelo does not compute UMAP/tSNE, the velocity plot falls back to a 2D embedding derived from the preprocessed expression matrix — typically the first two principal components of the velocity-ready data (often logged, normalized spliced expression used for visualization).
+
+So the plot is **not** a raw PC1-vs-PC2 scatter of velocity vectors alone. scVelo:
+1. Uses a 2D coordinate system (default: PCA of the expression used for plotting).
+2. Projects per-gene RNA velocity into cell-level velocity vectors in that space (`scv.tl.velocity_embedding`).
+3. Draws arrows on those 2D coordinates.
+
+For a methods description, something like: "RNA velocity vectors projected onto the first two principal components of normalized spliced expression" is accurate.
+
+If you want reproducible semantics, pass an explicit embedding:
+```python
+scv.tl.umap(adata)
+scv.pl.velocity_embedding_stream(adata, basis='umap')
+```
+or use your own `adata.obsm['X_pca']` / integrated embedding via `basis='X_pca'`.
+
+You can confirm what was used with:
+```python
+adata.uns.get('velocity_embedding', {})
+```
+
+================================================================================
+DRAFT 3 — scvelo #1195: RNA velocity results change between 0.2.4 and 0.3.1
+URL: https://github.com/theislab/scvelo/discussions/1195
+Status: unanswered — good dynamical-systems angle
+================================================================================
+
+Version jumps between 0.2.x and 0.3.x can change velocity fields for several concrete reasons:
+
+1. **Preprocessing defaults** — filtering, normalization, and HVG selection defaults shifted across minor releases. Even with the same raw data, different gene sets or size factors change the inferred velocity field.
+
+2. **Velocity mode and solver** — if you moved from `mode='steady'` to `mode='dynamical'` (or stochastic), you are solving a different dynamical system on gene expression manifolds. Dynamical mode fits a more explicit ODE-like model and often produces smoother, less noisy vector fields.
+
+3. **Neighbor graph / moments** — `scv.pp.moments` and the kNN graph underpin velocity smoothing. Changes in neighbor counts or distance metrics alter the vector field.
+
+To assess whether 0.2.4 results are still trustworthy:
+- Pin both versions in separate envs and log `scv.__version__`, `adata.uns['velocity_params']`, and the exact preprocessing pipeline.
+- Re-run 0.2.4 with identical HVGs, neighbors, and `mode` as 0.3.1. If streams still diverge, the difference is likely from the updated dynamical/stochastic implementation rather than user error.
+- For publication, report the scVelo version and mode; treat 0.3.x dynamical results as the maintained path (required for CellRank integration).
+
+If you share your `scv.tl.velocity` call and preprocessing snippet, I can help isolate which step drives the divergence.
+
+================================================================================
+DRAFT 4 — reservoirpy #177: Benchmarking performance?
+URL: https://github.com/reservoirpy/reservoirpy/discussions/177
+Status: 0 comments — strong fit for reservoir computing background
+================================================================================
+
+Yes — those three are the standard benchmarks in reservoir computing literature:
+
+- **Mackey-Glass** — chaotic time-series prediction (classic ESN benchmark).
+- **NARMA** — nonlinear autoregressive moving average; tests memory and nonlinearity.
+- **Santa Fe Laser** — real-world chaotic laser intensity prediction.
+
+For a credible RC paper or repo evaluation, a typical ladder is:
+
+1. **Vanilla ESN / Ridge readout baseline** on the above datasets (fixed train/test split, report NRMSE or MSE).
+2. **Ablation** — your modification vs. same hyperparameter search budget.
+3. **Optional deep baselines** — LSTM/GRU on the *same* windowed forecasting task (matched parameter count or training time budget). RC papers often show RC wins on **training efficiency** and competitive accuracy, not universal SOTA.
+
+Practical tips with ReservoirPy:
+- Fix `random_state` and document `reservoir_size`, `sr`, `lr`, `input_scaling`, `ridge` regularization.
+- Use consistent washout/transient lengths (critical for chaotic attractors — analogous to discarding initial transient before training on Lorenz/Rössler trajectories).
+- Report multiple seeds; ESN performance on chaotic systems can be seed-sensitive.
+
+For chaotic systems specifically (Lorenz, Rössler), short-horizon prediction error and attractor geometry (visual overlay of true vs. generated trajectories) are common supplements to NRMSE.
+
+If helpful, I can share a minimal benchmarking template comparing ReservoirPy ESN vs. ridge readout on Mackey-Glass with fixed splits.
+
+================================================================================
+SKIP — reservoirpy #226 (already resolved in v0.4.2)
+================================================================================
